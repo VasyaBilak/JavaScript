@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>Часы и календарь через флеш</title>
+<meta http-equiv="Содержимое-Тип" content="text/html; charset=windows-1251">
+
+</head>
+
+<body>
+
+<style>
+
+#image {
+
+    position: absolute;
+
+    top: 20px;
+
+    left: 4px;
+
+    background: #FFAAFF;
+    padding: 10px;
+
+}
+
+</style>
+
+ 
+<div id="image" onMouseOver="slide()" onMouseOut="slideback()">Here is something</div>
+
+<script language="JavaScript">
+
+var slidepos = 4;
+
+var slidediv = document.getElementById('image');
+
+var sliding = false;
+
+ 
+
+function slide() {
+
+    // Изначально убираем интервал (на всякий случай)
+
+    sliding = clearInterval(sliding);
+
+     
+
+    // Ставим интервал (тут 40 ms - скорость движения, меньше=быстрее)
+
+    sliding = setInterval(function() {
+
+        if( slidepos < 600 ) {// Двигаемся до 600 пикселей
+
+            slidepos++;
+            slidediv.style.left = slidepos; // Тут лучше без px - глючит в konqueror
+
+        } else {
+
+            // Убираем интервал, когда он не нужен9
+            sliding = clearInterval(sliding);
+
+        }
+
+    }, 40 );
+
+}
+
+ 
+
+function slideback() {
+
+    sliding = clearInterval(sliding);
+
+     
+
+    sliding = setInterval(function() {
+
+        if(slidepos > 4) { // до начальной позиции
+
+            slidepos--;
+
+            slidediv.style.left = slidepos;
+
+        } else {
+
+            sliding = clearInterval(sliding);
+
+        }
+
+    }, 40 );
+
+}
+
+</script>
+
+
+</body>
+</html>
